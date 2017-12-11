@@ -44,5 +44,31 @@ let todoApp = {
     let item = this.todoItems[index];   // var in which the todo item is saved
     item.completed = !item.completed;   // flips the boolean of todo item
     displayTodoItems();
-  }
+  },
+    toggleAllItems: function() {
+    // variable which stores number of all todo items
+    let allTodoItems = this.todoItems.length;
+    // variable that stores number of all completed items
+    let allCompletedItems = 0;
+    // to get a number of all completed todo items:
+    for (let i =0; i < allTodoItems; i++) {
+      if (this.todoItems[i].completed === true) {
+        allCompletedItems++;
+      }
+    }
+    /* if every todo item is completed, flip them to uncompleted state
+    from true to false */
+    if (allTodoItems === allCompletedItems) {
+      for (let j = 0; j < totalTodos; j++) {
+        this.todoItems[j].completed = false;
+      }
+    // in every other situation make everything completed
+    } else {
+      for (let h = 0; h < allTodoItems; h++) {
+        this.todoItems[h].completed = true;
+      }
+    }
+    this.todoItems.displayTodoItems();
+  },
+  
 };
