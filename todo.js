@@ -68,7 +68,7 @@ let todoApp = {
         this.todoItems[h].completed = true;
       }
     }
-    this.todoItems.displayTodoItems();
+    this.displayTodoItems();
   },
   
 };
