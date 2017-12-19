@@ -76,7 +76,7 @@ let todoApp = {
 Object with functions which we can acces from html for onclick buttons
 Less lines and repetition of code, variables which contain elements and less event listeners
 */
-var handlerMethods = {
+let handlerMethods = {
   displayTodoItems: function() {
     todoApp.displayTodoItems();
   },
@@ -84,27 +84,27 @@ var handlerMethods = {
     todoApp.toggleAllItems();
   },
   addTodoItem: function() {
-    var addTodoText = document.getElementById("addTodoText");
+    let addTodoText = document.getElementById("addTodoText");
     todoApp.addTodoItem(addTodoText.value);
     // clearing the input line for the next item
     addTodoText.value= "";
   },
   changeTodoItem: function() {
-    var changeTodoIndex = document.getElementById("changeTodoIndex");
-    var changeTodoText = document.getElementById("changeTodoText");
+    let changeTodoIndex = document.getElementById("changeTodoIndex");
+    let changeTodoText = document.getElementById("changeTodoText");
     todoApp.changeTodoItem(changeTodoIndex.valueAsNumber, changeTodoText.value);
     // clearing the input line for the next item
     changeTodoIndex.value = "";
     changeTodoText.value = "";
   },
   deleteTodoItem: function() {
-    var deleteTodoIndex = document.getElementById("deleteTodoIndex");
+    let deleteTodoIndex = document.getElementById("deleteTodoIndex");
     todoApp.deleteTodoItem(deleteTodoIndex.valueAsNumber);
     // clearing the input line for the next item
     deleteTodoIndex.value="";
   },
   toggleCompleted: function() {
-    var toggleCompletedIndex = document.getElementById("toggleCompletedIndex");
+    let toggleCompletedIndex = document.getElementById("toggleCompletedIndex");
     todoApp.toggleCompleted(toggleCompletedIndex.valueAsNumber);
     // clearing the input line for the next item
     toggleCompletedIndex.value = "";
