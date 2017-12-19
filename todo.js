@@ -43,7 +43,7 @@ let todoApp = {
   toggleCompleted: function(index) {
     let item = this.todoItems[index];   // var in which the todo item is saved
     item.completed = !item.completed;   // flips the boolean of todo item
-    displayTodoItems();
+    this.displayTodoItems();
   },
     toggleAllItems: function() {
     // variable which stores number of all todo items
