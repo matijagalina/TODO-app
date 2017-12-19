@@ -45,21 +45,21 @@ let todoApp = {
     item.completed = !item.completed;   // flips the boolean of todo item
     this.displayTodoItems();
   },
-    toggleAllItems: function() {
-    // variable which stores number of all todo items
+  toggleAllItems: function() {
+    // variable which stoes number of all to do items
     let allTodoItems = this.todoItems.length;
     // variable that stores number of all completed items
     let allCompletedItems = 0;
-    // to get a number of all completed todo items:
+    // to get a number of all completed todos:
     for (let i =0; i < allTodoItems; i++) {
       if (this.todoItems[i].completed === true) {
         allCompletedItems++;
       }
     }
-    /* if every todo item is completed, flip them to uncompleted state
+    /* if every to do items is completed, flip them to uncompleted state
     from true to false */
     if (allTodoItems === allCompletedItems) {
-      for (let j = 0; j < totalTodos; j++) {
+      for (let j = 0; j < allTodoItems; j++) {
         this.todoItems[j].completed = false;
       }
     // in every other situation make everything completed
@@ -70,5 +70,46 @@ let todoApp = {
     }
     this.displayTodoItems();
   },
-  
+};
+
+/*
+Object with functions which we can acces from html for onclick buttons
+Less lines and repetition of code, variables which contain elements and less event listeners
+*/
+var handlerMethods = {
+  displayTodoItems: function() {
+    todoApp.displayTodoItems();
+  },
+  toggleAllItems: function() {
+    todoApp.toggleAllItems();
+  },
+  addTodoItem: function() {
+    var addTodoText = document.getElementById("addTodoText");
+    todoApp.addTodoItem(addTodoText.value);
+    // clearing the input line for the next item
+    addTodoText.value= "";
+  },
+  changeTodoItem: function() {
+    var changeTodoIndex = document.getElementById("changeTodoIndex");
+    var changeTodoText = document.getElementById("changeTodoText");
+    todoApp.changeTodoItem(changeTodoIndex.valueAsNumber, changeTodoText.value);
+    // clearing the input line for the next item
+    changeTodoIndex.value = "";
+    changeTodoText.value = "";
+  },
+  deleteTodoItem: function() {
+    var deleteTodoIndex = document.getElementById("deleteTodoIndex");
+    todoApp.deleteTodoItem(deleteTodoIndex.valueAsNumber);
+    // clearing the input line for the next item
+    deleteTodoIndex.value="";
+  },
+  toggleCompleted: function() {
+    var toggleCompletedIndex = document.getElementById("toggleCompletedIndex");
+    todoApp.toggleCompleted(toggleCompletedIndex.valueAsNumber);
+    // clearing the input line for the next item
+    toggleCompletedIndex.value = "";
+  },
+  toggleAll: function() {
+    todoApp.toggleAllItems();
+  }
 };
