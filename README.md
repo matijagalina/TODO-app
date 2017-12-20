@@ -1,2 +1,2 @@
 # TODO-app
-Work in progress
+Work in progress - rich with code comments
