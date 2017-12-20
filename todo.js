@@ -30,27 +30,23 @@ let todoApp = {
     // variable that stores number of all completed items
     let allCompletedItems = 0;
     // to get a number of all completed todos:
-    for (let i =0; i < allTodoItems; i++) {
-      if (this.todoItems[i].completed === true) {
+    this.todoItems.forEach(function(item) {
+      if (item.completed === true) {
         allCompletedItems++;
       }
-    }
+    })
     /* if every to do items is completed, flip them to uncompleted state
     from true to false */
-    if (allTodoItems === allCompletedItems) {
-      for (let j = 0; j < allTodoItems; j++) {
-        this.todoItems[j].completed = false;
-      }
-    // in every other situation make everything completed
-    } else {
-      for (let h = 0; h < allTodoItems; h++) {
-        this.todoItems[h].completed = true;
-      }
-    }
+    this.todoItems.forEach(function(item) {
+      // using ternary operater
+      (allTodoItems === allCompletedItems) ? item.completed = false
+      : item.completed = true;
+    });
+
   },
 };
 
-// Functions which we can acces from html for onclick buttons
+// Object with functions which we can acces from html for onclick buttons
 // Less lines and repetition of code, variables which contain elements and less event listeners
 let handlerMethods = {
   toggleAllItems: function() {
@@ -74,11 +70,8 @@ let handlerMethods = {
     changeTodoText.value = "";
     showList.displayTodoItems();
   },
-  deleteTodoItem: function() {
-    let deleteTodoIndex = document.getElementById("deleteTodoIndex");
-    todoApp.deleteTodoItem(deleteTodoIndex.valueAsNumber);
-    // clearing the input line for the next item
-    deleteTodoIndex.value="";
+  deleteTodoItem: function(index) {
+    todoApp.deleteTodoItem(index);
     showList.displayTodoItems();
   },
   toggleCompleted: function() {
@@ -95,27 +88,60 @@ let handlerMethods = {
 };
 
 // Object with methods for displaying items in a list
-var showList = {
+let showList = {
   displayTodoItems: function () {
-    var todoList = document.querySelector("ul");
+    let todoList = document.querySelector("ul");
     // clears list before showing the to do items
     todoList.innerHTML = "";
-    for(var i = 0; i < todoApp.todoItems.length; i++) {
-      var todoListItem = document.createElement("li");
-      var todo = todoApp.todoItems[i];
-      var todoItem = "";
-
-      // if completed print todoText with (x) otherwise with ( )
-      if (todo.completed === true) {
-        todoItem = "(x) " + todo.todoDescription;
-      } else {
-        todoItem = "( ) " + todo.todoDescription;
-      }
-
+    // goes through every item inside todoItems list
+    todoApp.todoItems.forEach(function(item, position) {
+      // defines a variable which holds method for creating an list item inside an unordered list
+      let todoListItem = document.createElement("li");
+      let todoItem = "";
+      // if completed print todoDescription with (x), otherwise with ( )
+      // again using ternary operater instead of if/else - less code
+      (item.completed === true) ? todoItem = "(x) " + item.todoDescription
+      : todoItem = "( ) " + item.todoDescription;
+      /* adding an id attr which coresponds with its index to every list item
+      so it can be connected with other functions
+      */
+      todoListItem.id = position;
       // adding the text from the todo item to the list item
       todoListItem.textContent = todoItem;
+      // adding the delete button to every list with todo item
+      todoListItem.appendChild(this.addDeleteButton());
       // append the list item with todo description to the list element
       todoList.appendChild(todoListItem);
-    }
+    }, this);  /* this is an optional arg in forEach which refers to object in which it sits
+              better to use because it can work even if I change the object name later
+              - happens because anonymous function inside forEach isn' method of Object
+              so this doesn't refer to object */
+  },
+  // method to create a button used for deleting todo items
+  addDeleteButton: function() {
+    let deleteButton = document.createElement('button');
+    // giving the button a text inside of it
+    deleteButton.textContent = 'Delete';
+    // adding a class name to a button
+    deleteButton.className = 'deleteButton';
+    return deleteButton;
+  },
+  // method for adding event listeners on every list item using event delegation
+  manageEventListeners: function() {
+    let todoList = document.querySelector('ul');
+
+    todoList.addEventListener('click', function(event) {
+    // variable that stores the clicked element
+    let clickedElement = event.target;
+    // check if elementClicked is a delete button
+    if (clickedElement.className === 'deleteButton') {
+      // Run handlers.deleteTodo to delete todo items next ot clicked button
+      // parseInt turns string into integer
+      handlerMethods.deleteTodoItem(parseInt(clickedElement.parentNode.id));
+      }
+    });
   }
 };
+
+// starts event listening
+showList.manageEventListeners();
