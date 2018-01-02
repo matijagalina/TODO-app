@@ -10,35 +10,37 @@
   </head>
 
   <body>
-  	<header>
-  		<h1>Stuff to do</h1>
-  	</header>
+  	<main>
+	  	<header>
+	  		<h1>Stuff to do</h1>
+	  	</header>
 
-		<section class="buttons">
-	    <div>
-	    <button onclick="handlerMethods.toggleAllItems()">Toggle them all</button>
-	    </div>
+			<section class="buttons">
+		    <div>
+		    <button onclick="handlerMethods.toggleAllItems()">Toggle them all</button>
+		    </div>
 
-	    <div>
-	    <button onclick="handlerMethods.addTodoItem()">Add stuff to do</button>
-	    <input id= "addTodoText" type="text" placeholder="todo text">
-	    </div>
+		    <div>
+		    <button onclick="handlerMethods.addTodoItem()">Add stuff to do</button>
+		    <input id= "addTodoText" type="text" placeholder="todo text">
+		    </div>
 
-	    <div>
-	      <button onclick="handlerMethods.changeTodoItem()">Change stuff to do</button>
-	      <input id="changeTodoIndex" type="number" placeholder="todo position">
-	      <input id="changeTodoText" type="text" placeholder="new todo text">
-	    </div>
+		    <div>
+		      <button onclick="handlerMethods.changeTodoItem()">Change stuff to do</button>
+		      <input id="changeTodoIndex" type="number" placeholder="todo position">
+		      <input id="changeTodoText" type="text" placeholder="new todo text">
+		    </div>
 
-	    <div>
-	      <button onclick="handlerMethods.toggleCompleted()">Toggle stuff to be completed</button>
-	      <input id="toggleCompletedIndex" type="number" placeholder="todo position">
-	    </div>
-    </section>
+		    <div>
+		      <button onclick="handlerMethods.toggleCompleted()">Toggle stuff to be completed</button>
+		      <input id="toggleCompletedIndex" type="number" placeholder="todo position">
+		    </div>
+	    </section>
 
-		<section class="todo-list">
-			<ul></ul>
-		</section>
+			<section class="todo-list">
+				<ul></ul>
+			</section>
+		</main>
     
     <script src="todo.js"></script>
   </body>
